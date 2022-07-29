@@ -1,0 +1,87 @@
+{%extends 'base1.html'%}
+
+{%block body_block%}
+<!-- Illustrations -->
+<body class="bg-primary">
+
+                            <div class="card shadow mb-4 mt-5">
+                                <div class="card-header py-3 text-center text-light bg-primary">
+                                    <h4>{{request.user}},<a
+                                            target="_blank" rel="nofollow" href="https://undraw.co/"></a>this is your current profile pic</h4>
+                                    <h6 class="m-0 font-weight-bold text-primary"></h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="text-center">
+                                        <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 100rem;"
+                                            src="{{request.user.users.profile_pic.url}}" alt="...">
+                                    </div>
+
+
+                                </div>
+                            </div>
+{%load static%}
+<link href="{%static 'css/pro.css'%}" rel="stylesheet"/>
+<br>
+
+<h1 class="text-center mt-5 bg-dark text-light">Update Picture</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-6 mt-5">
+            <div class="card" style="width: 100%;">
+                <img src="{{request.user.users.profile_pic.url}}" alt="">
+            </div>
+        </div>
+        <div class="col-6 mt-5">
+            <form action="" method="post" enctype="multipart/form-data" class="form-control">
+                {%csrf_token%}
+                <div>
+                    {%if messages%}
+                    {%for msg in messages%}
+                    {%if msg.level == DEFAULT_MESSAGE_LEVELS.SUCCESS%}
+                    <div class="alert alert-warning alert-dismissible bg-success text-light" role="alert">
+                        <strong>Congrats!!!</strong>Profile picture Successfully Updated
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    {%endif%}
+                    {%if msg.level == DEFAULT_MESSAGE_LEVELS.ERROR%}
+                    <div class="alert alert-warning alert-dismissible bg-danger text-light" role="alert">
+                        <strong></strong> Sorry Can't Register!!!You should check in on some of those fields below.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    {%endif%}
+
+
+                    {%endfor%}
+                    {%endif%}
+                </div>
+                <div>
+
+
+                </div>
+
+                <div class="mr row text-light bg-danger">
+                    <div class="col-6 ">
+                        <h4>
+                            update your profile picture
+                        </h4>
+                        <div>
+                            <label for="id_profile_pic" class="form-label">Input File</label>
+                            <input class="form-control form-control-lg" id="id_profile_pic" type="file"
+                                   name="profile_pic">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">Update Now</button>
+                </div>
+
+            </form>
+        </div>
+        <div class="col-4">
+
+        </div>
+
+    </div>
+
+</div>
+</body>
+
+{%endblock%}
